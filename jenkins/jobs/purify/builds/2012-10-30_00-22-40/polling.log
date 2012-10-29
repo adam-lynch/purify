@@ -1,0 +1,12 @@
+Started on 30-Oct-2012 00:22:31
+Using strategy: Default
+[poll] Last Build : #20
+[poll] Last Built Revision: Revision 4fcd9420b4f9c1bdb67c6b699d9d95f5e608f0cb (origin/HEAD, origin/master)
+Fetching changes from the remote Git repositories
+Fetching upstream changes from https://github.com/adam-lynch/purify.git
+Polling for changes in
+Seen branch in repository origin/HEAD
+Seen branch in repository origin/gh-pages
+Seen branch in repository origin/master
+Done. Took 4.1 sec
+Changes found
