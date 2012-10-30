@@ -1,0 +1,15 @@
+Started by an SCM change
+Building in workspace C:\Program Files\Jenkins\workspace\purify
+Checkout:purify / C:\Program Files\Jenkins\workspace\purify - hudson.remoting.LocalChannel@11c7f8d
+Using strategy: Default
+Last Built Revision: Revision 25c4c191d0c884fc205ac240177aee06cc9fde9a (origin/gh-pages)
+Fetching changes from 1 remote Git repository
+Fetching upstream changes from https://github.com/adam-lynch/purify.git
+Seen branch in repository origin/HEAD
+Seen branch in repository origin/gh-pages
+Seen branch in repository origin/master
+Commencing build of Revision 4fcd9420b4f9c1bdb67c6b699d9d95f5e608f0cb (origin/HEAD, origin/master)
+Checking out Revision 4fcd9420b4f9c1bdb67c6b699d9d95f5e608f0cb (origin/HEAD, origin/master)
+No change to record in branch origin/HEAD
+No change to record in branch origin/master
+Finished: SUCCESS
