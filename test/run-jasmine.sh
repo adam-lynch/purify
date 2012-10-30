@@ -1,0 +1,1 @@
+java -jar "JsTestDriver.jar" --port 9876 --server http://localhost:9876 --tests all --reset --config jsTestDriver-Jasmine.conf --testOutput results-jasmine --browser "../../../../Internet Explorer\iexplore.exe","../../../../Mozilla Firefox\firefox.exe"
