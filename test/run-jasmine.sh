@@ -1,1 +1,0 @@
-java -jar "JsTestDriver.jar" --port 9876 --server http://localhost:9876 --tests all --reset --config jsTestDriver-jasmine.conf --testOutput results-jasmine --browser "/usr/bin/firefox","/usr/bin/google-chrome"

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Chrome_220122979_Linux.GreeterTest" errors="0" failures="0" tests="1" time="0.006">
-<testcase classname="Chrome_220122979_Linux.GreeterTest" name="testGreet" time="0.006"/>
-</testsuite>

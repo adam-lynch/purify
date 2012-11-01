@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Firefox_1501_Linux.GreeterTest" errors="0" failures="0" tests="1" time="0.015">
-<testcase classname="Firefox_1501_Linux.GreeterTest" name="testGreet" time="0.015"/>
-</testsuite>
