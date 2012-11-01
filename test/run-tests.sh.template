@@ -1,0 +1,1 @@
+java -jar "config/JsTestDriver.jar" --port 9876 --server http://localhost:9876 --tests all --reset --config config/jsTestDriver.conf --testOutput results --browser "C:\Users\lynchy010\AppData\Local\Google\Chrome\Application\chrome.exe"
