@@ -1,55 +1,32 @@
 <!doctype html>
 <html>
   <head>
-    <title>Set Page Color Popup</title>
-    <style>
-    body {
-      overflow: hidden;
-      margin: 0px;
-      padding: 0px;
-      background: white;
-    }
-
-    div:first-child {
-      margin-top: 0px;
-    }
-
-    div {
-      cursor: pointer;
-      text-align: center;
-      padding: 1px 3px;
-      font-family: sans-serif;
-      font-size: 0.8em;
-      width: 100px;
-      margin-top: 1px;
-      background: #cccccc;
-    }
-    div:hover {
-      background: #aaaaaa;
-    }
-    #red {
-      border: 1px solid red;
-      color: red;
-    }
-    #blue {
-      border: 1px solid blue;
-      color: blue;
-    }
-    #green {
-      border: 1px solid green;
-      color: green;
-    }
-    #yellow {
-      border: 1px solid yellow;
-      color: yellow;
-    }
-    </style>
+    <link href="../styling/style.css" rel="stylesheet">
+    <title>Purify</title>
     <script src="../js/popup.js"></script>
   </head>
   <body>
-    <div id="red">red</div>
-    <div id="blue">blue</div>
-    <div id="green">green</div>
-    <div id="yellow">yellow</div>
+	<div class="hero-unit">
+		<div class="row">
+			<div class="span2"><label><input type="checkbox" id="jumpToFirst" />Jump to first quote</label></div>
+		</div>
+		<button class="btn">Highlight Quotes</button>
+		<div class="row">
+			<div class="span2"><a class="btn btn-info btn-small" href="https://github.com/adam-lynch/purify" target="_blank">Learn more &raquo;</a></div>
+		</div>
+	</div>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
   </body>
 </html>
