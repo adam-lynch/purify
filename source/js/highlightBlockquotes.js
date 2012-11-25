@@ -9,9 +9,12 @@ purify.highlightBlockquotes = function(doc){
 	if(blockquotes.length){
 		
 		for(var i = 0; i < blockquotes.length; i++){
-			var blockquote = blockquotes[i],
+			
+            var blockquote = blockquotes[i],
 				blockquoteStyle = blockquote.style,
 				textColor = 'yellow'==purify.color?'black':'white';
+            
+            //change styles:
 			blockquoteStyleheight = blockquote.offsetHeight+'px';
 			blockquoteStyle.overflowY = 'scroll'
 			blockquoteStyle.backgroundColor = purify.color;
@@ -22,7 +25,13 @@ purify.highlightBlockquotes = function(doc){
 			blockquoteStyle.borderColor = purify.color;
 			blockquoteStyle.borderLeftColor = 'black';
 			
-			if(0 == i){
+            
+            console.log('----------');
+            console.log('jumpFirstQuoteState is ' + purify.jumpToFirstQuote);
+            console.log('----------');
+            
+            //jump to first quote
+			if(0 == i && purify.jumpToFirstQuote){
 				blockquote.scrollIntoView(true);
 			}
 		}

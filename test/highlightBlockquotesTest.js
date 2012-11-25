@@ -1,11 +1,29 @@
 describe("blockquote highlighter", function() {
-	beforeEach(function() {
+	/*:DOC += <style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>*/
+    
+    beforeEach(function() {
 		purify.color = 'pink';
-		/*:DOC += <style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>*/
+        purify.jumpToFirstQuote = false;
+        window.scroll(0, 0);//make sure document is scrolled to top before running a test
 	});
 
 
-    it("changes the scroll depth to the top of the first blockquote", function() {
+    
+    it("doesn't change the scroll depth to the top of the first blockquote when jumpToFirstQuote is not true", function() {
+        
+        expect(document.body.scrollTop).toBe(0);
+		
+		var blockquoteOffsetTop = purify.util.getOffset(document.querySelectorAll('blockquote')[0]).top;	
+        expect(blockquoteOffsetTop).toBeGreaterThan(0);		
+		
+		purify.highlightBlockquotes();//this is where the magic happens
+
+        expect(window.scrollY).toBe(0);//shouldn't have moved
+    });
+    
+    it("changes the scroll depth to the top of the first blockquote when jumpToFirstQuote is true", function() {
+        purify.jumpToFirstQuote = true;
+        
         expect(document.body.scrollTop).toBe(0);
 		
 		var blockquoteOffsetTop = purify.util.getOffset(document.querySelectorAll('blockquote')[0]).top;	
