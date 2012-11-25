@@ -24,11 +24,6 @@ purify.highlightBlockquotes = function(doc){
 			blockquoteStyle.color = textColor;
 			blockquoteStyle.borderColor = purify.color;
 			blockquoteStyle.borderLeftColor = 'black';
-			
-            
-            console.log('----------');
-            console.log('jumpFirstQuoteState is ' + purify.jumpToFirstQuote);
-            console.log('----------');
             
             //jump to first quote
 			if(0 == i && purify.jumpToFirstQuote){
