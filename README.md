@@ -1,6 +1,6 @@
 # Purify
 
-`purify` is a JavaScript extension for Google Chrome which helps readers find quotes within an article. 
+`purify` is a Google Chrome extension which helps you to find quotes within an article. 
 Inspired by one too many opinion pieces based around a sensationalized quote
 
 ## [Loading the extension](https://github.com/adam-lynch/purify/wiki/Loading-&-packing)
