@@ -1,0 +1,10 @@
+/* crudely reset all margin and padding */
+*, 
+html, 
+body {
+	margin:0; padding:0;
+}
+
+.large-buffer {
+	height: 1000px;
+}
