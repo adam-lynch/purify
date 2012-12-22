@@ -27,6 +27,7 @@ function highlightBlockquotes(e) {
 //addclickhandlers for buttons & checkbox
 document.addEventListener('DOMContentLoaded', function () {
 	//button click
-	var hightlightButton = document.getElementById("highlight-btn");
-	hightlightButton.addEventListener('click', highlightBlockquotes);
+	console.log('DOCCCCC: '+document);
+	var highlightButton = document.getElementById("highlight-btn").
+	highlightButton.addEventListener('click', highlightBlockquotes);
 });
