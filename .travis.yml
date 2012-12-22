@@ -1,1 +1,5 @@
-script: ./test/run-tests.sh
+language: node_js
+node_js:
+  - 0.8
+
+script: ./test/.travis-run-tests.sh
