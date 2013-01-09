@@ -1,4 +1,6 @@
 #!/bin/bash
+pwd
+ls -l
 chmod 777 ./test/server.sh
 chmod 777 ./test/config/JsTestDriver.jar
 sh server.sh stop > /dev/null
