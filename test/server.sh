@@ -17,20 +17,19 @@ if [ ! -f "$ROOTDIR/coverage-$JSTD_VERSION.jar" ]; then
     curl http://js-test-driver.googlecode.com/files/coverage-$JSTD_VERSION.jar > $ROOTDIR/coverage-$JSTD_VERSION.jar
 fi
 
-if [ "start" == "start" ]
-    then
-		echo "Starting JSTD Server"
+if [ $COMMAND == "start" ]; then
+	echo "Starting JSTD Server"
 
-		nohup java -jar $ROOTDIR/JsTestDriver-$JSTD_VERSION.jar --port 9876 > $ROOTDIR/jstd.out 2> $ROOTDIR/jstd.err < /dev/null &
-		echo $! > $ROOTDIR/jstd.pid
+	nohup java -jar $ROOTDIR/JsTestDriver-$JSTD_VERSION.jar --port 9876 > $ROOTDIR/jstd.out 2> $ROOTDIR/jstd.err < /dev/null &
+	echo $! > $ROOTDIR/jstd.pid
 
-		echo "Starting PhantomJS"
+	echo "Starting PhantomJS"
 
-		nohup phantomjs phantomjs-jstd.js > $ROOTDIR/phantomjs.out 2> $ROOTDIR/phantomjs.err < /dev/null &
-		echo $! > $ROOTDIR/phantomjs.pid
+	nohup phantomjs phantomjs-jstd.js > $ROOTDIR/phantomjs.out 2> $ROOTDIR/phantomjs.err < /dev/null &
+	echo $! > $ROOTDIR/phantomjs.pid
 fi
 
-if [[ $COMMAND == "stop" ]]; then
+if [ $COMMAND == "stop" ]; then
     echo "Killing JSTD Server"
 
     PID=`cat $ROOTDIR/jstd.pid`
