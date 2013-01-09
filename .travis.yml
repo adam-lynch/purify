@@ -1,2 +1,2 @@
-before_script: ls test -l 
+before_script: chmod 777 ./test/travis-run-tests.sh
 script: ./test/travis-run-tests.sh
