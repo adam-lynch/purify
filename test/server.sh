@@ -17,7 +17,7 @@ if [ ! -f "$ROOTDIR/coverage-$JSTD_VERSION.jar" ]; then
     curl http://js-test-driver.googlecode.com/files/coverage-$JSTD_VERSION.jar > $ROOTDIR/coverage-$JSTD_VERSION.jar
 fi
 
-if [ "$COMMAND" == "$COMMAND" ]; then
+if [ true ]; then
 	echo "Starting JSTD Server"
 
 	nohup java -jar $ROOTDIR/JsTestDriver-$JSTD_VERSION.jar --port 9876 > $ROOTDIR/jstd.out 2> $ROOTDIR/jstd.err < /dev/null &
