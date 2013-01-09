@@ -1,5 +1,2 @@
-language: node_js
-node_js:
-  - 0.8 
-before_script: ls -l 
-script: test/travis-run-tests.sh
+before_script: ls test -l 
+script: ./test/travis-run-tests.sh
