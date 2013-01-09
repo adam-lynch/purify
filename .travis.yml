@@ -1,5 +1,5 @@
 language: node_js
 node_js:
   - 0.8 
-before_script: chmod 777 test/travis-run-tests.sh 
+before_script: pwd 
 script: test/travis-run-tests.sh
