@@ -32,19 +32,19 @@
         <antcall target="downloadJsTestDriverCoverageJar"/>
     </target>
 
-    <target name="start">
+    <target name="start" depends="common">
         <antcall target="common"/>
         <antcall target="startJsTestDriverServer"/>
         <antcall target="startPhantomJS"/>
     </target>
 
-    <target name="stop">
+    <target name="stop" depends="common">
         <antcall target="common"/>
         <antcall target="stopJsTestDriverServer"/>
         <antcall target="stopPhantomJS"/>
     </target>
 
-    <target name="startJsTestDriverServer">
+    <target name="startJsTestDriverServer" depends="downloadJsTestDriverJar, downloadJsTestDriverCoverageJar">
         <echo>Starting JsTestDriver server...</echo>
         <java
                 jar="${rootDir}/${jsTestDriverJar}"
