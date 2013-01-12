@@ -15,7 +15,11 @@
         so OS-sniffing has to be done.
     </description>
 
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${rootDir}/ant-contrib-0.3.jar"/>
+        </classpath>
+    </taskdef>
 
     <property name="rootDir" value="${basedir}"/>
     <property name="jsTestDriverVersion" value="1.3.4.b"/>
