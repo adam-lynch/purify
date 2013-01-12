@@ -1,4 +1,5 @@
 <project name="MyProject" default="runTests" basedir=".">
+
     <description>
         ANT version of jstestdriver-phantomjs server.js.
         Created for cross-platform compatibility.
@@ -15,6 +16,7 @@
         so OS-sniffing has to be done.
     </description>
 
+    <property environment="env"/>
     <property name="rootDir" value="${basedir}"/>
     <property name="jsTestDriverVersion" value="1.3.4.b"/>
     <property name="jsTestDriverJar" value="coverage-${jsTestDriverVersion}.jar"/>
@@ -26,21 +28,9 @@
 
         <antcall target="adjustPermissions"/>
 
-        <taskdef resource="net/sf/antcontrib/antcontrib.properties">
-            <classpath>
-                <pathelement location="${rootDir}/${antContribJar}"/>
-            </classpath>
-        </taskdef>
-
 
         <antcall target="startJsTestDriverServer"/>
         <antcall target="startPhantomJS"/>
-    </target>
-
-    <target name="stop">
-        <antcall target="detectOs"/>
-        <antcall target="stopJsTestDriverServer"/>
-        <antcall target="stopPhantomJS"/>
     </target>
 
     <target name="startJsTestDriverServer" depends="downloadJsTestDriverJar, downloadJsTestDriverCoverageJar">
@@ -52,36 +42,6 @@
             <arg value="--port"/>
             <arg value="9876"/>
         </java>
-
-        <!-- Capturing JsTestDriver process ID -->
-        <echo file="${rootDir}/jstd.pid">${env.$!}</echo>
-    </target>
-
-    <target name="stopJsTestDriverServer">
-        <echo>Killing JsTestDriver server...</echo>
-
-        <loadfile property="jsTestDriverServerProcessID"
-                  srcFile="${rootDir}/jstd.pid"/>
-
-        <if>
-            <equals arg1="${isLinux}" arg2="true" />
-            <then>
-                <exec executable="kill">
-                    <arg value="${jsTestDriverServerProcessID}"/>
-                </exec>
-            </then>
-            <elseif>
-                <equals arg1="${isWindows}" arg2="true" />
-                <then>
-                    <exec executable="taskkill">
-                        <arg value="/PID"/>
-                        <arg value="${jsTestDriverServerProcessID}"/>
-                    </exec>
-                </then>
-            </elseif>
-        </if>
-
-        <delete file="${rootDir}/jstd.pid" verbose="true"/>
     </target>
 
     <target name="startPhantomJS">
@@ -92,37 +52,6 @@
 
             <arg value="${rootDir}/phantomjs-jstd.js"/>
         </exec>
-
-        <!-- Capturing PhantomJS process ID -->
-        <echo file="${rootDir}/phantomjs.pid">${env.$!}</echo>
-
-    </target>
-
-    <target name="stopPhantomJS">
-        <echo>Killing PhantomJS...</echo>
-
-        <loadfile property="phantomJSProcessID"
-                  srcFile="${rootDir}/phantomjs.pid"/>
-
-        <if>
-            <equals arg1="${isLinux}" arg2="true" />
-            <then>
-                <exec executable="kill">
-                    <arg value="${phantomJSProcessID}"/>
-                </exec>
-            </then>
-            <elseif>
-                <equals arg1="${isWindows}" arg2="true" />
-                <then>
-                    <exec executable="taskkill">
-                        <arg value="/PID"/>
-                        <arg value="${phantomJSProcessID}"/>
-                    </exec>
-                </then>
-            </elseif>
-        </if>
-
-        <delete file="${rootDir}/phantomjs.pid" verbose="true"/>
     </target>
 
     <target name="runTests">
@@ -140,8 +69,6 @@
             <arg value="--testOutput"/>
             <arg value="results"/>
         </java>
-
-        <antcall target="stop"/>
     </target>
 
     <target name="downloadJsTestDriverJarsIfTheyDontExist">
@@ -152,19 +79,8 @@
     </target>
 
     <target name="adjustPermissions">
-        <chmod file="${rootDir}/${${antContribJar}}" perm="777"/>
         <chmod file="${rootDir}/${jsTestDriverJar}" perm="777"/>
         <chmod file="${rootDir}/${jsTestDriverCoverageJar}" perm="777"/>
-    </target>
-
-    <target name="detectOs">
-        <condition property="isWindows">
-            <os family="windows" />
-        </condition>
-
-        <condition property="isLinux">
-            <os family="unix" />
-        </condition>
     </target>
 
     <target name="checkJarExistence">
