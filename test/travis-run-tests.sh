@@ -1,5 +1,6 @@
 
 chmod 777 ./test/server.xml
+chmod 777 ./test/ant-contrib-1.0b3.jar
 chmod 777 ./test/config/JsTestDriver.jar
 ant -f ./test/server.xml start
 nohup java -jar "./test/config/JsTestDriver.jar" --port 9876 --captureConsole > /dev/null &

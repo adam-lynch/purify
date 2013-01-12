@@ -26,24 +26,21 @@
     <property name="jsTestDriverJar" value="coverage-${jsTestDriverVersion}.jar"/>
     <property name="jsTestDriverCoverageJar" value="JsTestDriver-${jsTestDriverVersion}.jar"/>
 
-    <target name="common">
-        <!-- set up some properties which will be used later on -->
-        <antcall target="detectOs"/>
-
+    <target name="downloadJsTestDriverJarsIfTheyDontExist">
         <!-- check if required JsTestDriver JARs exist and download them if they don't -->
         <antcall target="checkJarExistence"/>
         <antcall target="downloadJsTestDriverJar"/>
         <antcall target="downloadJsTestDriverCoverageJar"/>
     </target>
 
-    <target name="start" depends="common">
-        <antcall target="common"/>
+    <target name="start">
+        <antcall target="downloadJsTestDriverJarsIfTheyDontExist"/>
         <antcall target="startJsTestDriverServer"/>
         <antcall target="startPhantomJS"/>
     </target>
 
-    <target name="stop" depends="common">
-        <antcall target="common"/>
+    <target name="stop">
+        <antcall target="detectOs"/>
         <antcall target="stopJsTestDriverServer"/>
         <antcall target="stopPhantomJS"/>
     </target>
