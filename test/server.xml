@@ -15,9 +15,9 @@
         so OS-sniffing has to be done.
     </description>
 
+    <property name="rootDir" value="${basedir}"/>
     <taskdef resource="${rootDir}/antcontrib.properties"/>
 
-    <property name="rootDir" value="${basedir}"/>
     <property name="jsTestDriverVersion" value="1.3.4.b"/>
     <property name="jsTestDriverJar" value="coverage-${jsTestDriverVersion}.jar"/>
     <property name="jsTestDriverCoverageJar" value="JsTestDriver-${jsTestDriverVersion}.jar"/>
