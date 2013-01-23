@@ -39,7 +39,7 @@
             while (false !== ($filename = @readdir($directoryContents))) {
                 //if the file name ends with .js for example
                 if(substr($filename, -$desiredEndingLength) === $desiredEnding){
-                    $files[] = $pathPrefix . $filename;
+                    $files[] = $pathPrefix . (empty($pathPrefix) ? '' : '/') . $filename;
                 }
             }
         }
@@ -66,7 +66,6 @@
 
         //read in & interpret the config file
         $parsedYaml = Spyc::YAMLLoad($configContents);
-
 
         //if the parsing failed or the required 'load' element doesn't exit
         if(empty($parsedYaml) || !isset($parsedYaml['load'])){

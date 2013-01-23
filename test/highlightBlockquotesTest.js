@@ -1,5 +1,5 @@
 describe( "blockquote highlighter", function(){
-	/*:DOC += <style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>*/
+	$('body' ).append('<style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>');
 
 	beforeEach( function(){
 		purify.color = 'pink';
