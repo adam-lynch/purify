@@ -1,1 +1,2 @@
-script: ant -f ./test/build.xml
+before_script: php ./test/writeTestRunnerFile.php
+script: phantomjs ./test/phantomjs_jasminexml_runner.js ./test/run-tests.html ./test/results

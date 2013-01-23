@@ -1,95 +1,40 @@
-<project name="MyProject" default="runTests" basedir=".">
-
-    <description>
-        ANT version of jstestdriver-phantomjs server.js.
-        Created for cross-platform compatibility.
-
-        ant-contrib required for 'if' tasks.
-
-        Differences between this and server.js:
-        - Output of executables isn't pushed to (.out, .err) files,
-        because in ANT if you execute something and set
-        spawn to true, then you can't capture the output.
-        Fortunately, it won't show up in the console when you
-        run the script either.
-        - Unfortunately, there's no ant 'kill' task,
-        so OS-sniffing has to be done.
-    </description>
+<project name="purify" default="init" basedir=".">
 
     <property environment="env"/>
     <property name="rootDir" value="${basedir}"/>
-    <property name="jsTestDriverVersion" value="1.3.4.b"/>
-    <property name="jsTestDriverJar" value="JsTestDriver-${jsTestDriverVersion}.jar"/>
-    <property name="jsTestDriverPort" value="9876"/>
-    <property name="antContribJar" value="ant-contrib-0.3.jar"/>
+    <property name="xmlRunnerLocation" value="${rootDir}/config/phantomjs_jasminexml_runner.js"/>
+    <property name="phpWriterFile" value="${rootDir}/writeTestRunnerFile.php"/>
+    <property name="htmlRunnerLocation" value="${rootDir}/test-runner.html"/>
+    <property name="resultsLocation" value="${rootDir}/results"/>
 
-    <target name="start">
-        <antcall target="downloadJsTestDriverJarsIfTheyDontExist"/>
-
-        <antcall target="adjustPermissions"/>
-
-
-        <antcall target="startJsTestDriverServer"/>
-        <antcall target="startPhantomJS"/>
+    <target name="init">
+        <antcall target="writeTestRunnerFile"/>
+        <antcall target="runTests"/>
     </target>
 
-    <target name="startJsTestDriverServer" depends="downloadJsTestDriverJar">
-        <echo>Starting JsTestDriver server...</echo>
-        <java
-                jar="${rootDir}/${jsTestDriverJar}"
-                fork="true"
-                spawn="true">
-            <arg value="--port"/>
-            <arg value="${jsTestDriverPort}"/>
-            <arg value="--reset"/>
-        </java>
-    </target>
-
-    <target name="startPhantomJS">
-        <echo>Starting PhantomJS...</echo>
+    <target name="writeTestRunnerFile">
+        <echo>Parsing config file and writing test runner HTML file...</echo>
         <exec
-                executable="phantomjs">
+                executable="php"
+                failonerror="true">
 
-            <arg value="${rootDir}/phantomjs-jstd.js"/>
+            <arg value="${phpWriterFile}"/>
         </exec>
     </target>
 
     <target name="runTests">
-        <antcall target="start"/>
+        <echo>Executing tests...</echo>
+        <exec
+                executable="phantomjs"
+                failonerror="true">
 
-        <echo>Starting tests...</echo>
-        <java
-                jar="${rootDir}/${jsTestDriverJar}"
-                fork="true">
-            <arg value="--tests"/>
-            <arg value="all"/>
-            <arg value="--config"/>
-            <arg value="config/jsTestDriver.conf"/>
-            <arg value="--testOutput"/>
-            <arg value="results"/>
-            <arg value="--runnerMode"/>
-            <arg value="DEBUG"/>
-        </java>
+            <arg value="${xmlRunnerLocation}"/>
 
-    </target>
+            <arg value="${htmlRunnerLocation}"/>
 
-    <target name="downloadJsTestDriverJarsIfTheyDontExist">
-        <!-- check if required JsTestDriver JARs exist and download them if they don't -->
-        <antcall target="checkJarExistence"/>
-        <antcall target="downloadJsTestDriverJar"/>
-    </target>
+            <arg value="${resultsLocation}"/>
 
-    <target name="adjustPermissions">
-        <chmod file="${rootDir}/${jsTestDriverJar}" perm="777"/>
-    </target>
-
-    <target name="checkJarExistence">
-        <available file="${rootDir}/${jsTestDriverJar}" property="jsTestDriverJarExists"/>
-    </target>
-
-    <target name="downloadJsTestDriverJar" depends="checkJarExistence" unless="jsTestDriverJarExists">
-        <echo>Downloading JsTestDriver jar...</echo>
-        <get src="http://js-test-driver.googlecode.com/files/${jsTestDriverJar}" dest="${rootDir}/${jsTestDriverJar}"/>
+        </exec>
     </target>
 
 </project>
