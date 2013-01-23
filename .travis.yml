@@ -1,0 +1,8 @@
+language: php
+
+# list any PHP version you want to test against
+php:
+  - 5.4
+
+before_script: php ./test/writeTestRunnerFile.php
+script: phantomjs ./test/config/phantomjs_jasminexml_runner.js ./test/test-runner.html ./test/results

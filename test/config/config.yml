@@ -1,0 +1,8 @@
+load:
+ - config/jasmine/jasmine.js
+ - config/jasmine/jasmine-html.js
+ - config/jasmine.phantomjs-reporter.js
+ - bootstrap/*.js #set up purify for the test environment
+ - util/*.js #test utils
+ - ../source/js/*.js #source JavaScript files to test
+ - *.js #test specs
