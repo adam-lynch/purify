@@ -26,17 +26,17 @@
             //see comment at the top of page about relative URLs
 
             //if there was no path matched, it's the current folder
-            $directoryPath = empty($matches[1]) ? './' : $matches[1];
+            $directoryPath = empty($matches[1]) ? '' : substr($matches[1], 0, -1);//strip off trailing slash
             $desiredEnding= "." . $matches[2];//.js for example
             $desiredEndingLength = strlen($desiredEnding);
 
             //read filenames in directory:
-            $directoryContents  = opendir($directoryPath);
+            $directoryContents  = opendir('./test/'.$directoryPath);
 
             //don't forget to actually give the path along with the actual filename
             $pathPrefix = './' === $directoryPath ? '' : $directoryPath;
 
-            while (false !== ($filename = readdir($directoryContents))) {
+            while (false !== ($filename = @readdir($directoryContents))) {
                 //if the file name ends with .js for example
                 if(substr($filename, -$desiredEndingLength) === $desiredEnding){
                     $files[] = $pathPrefix . $filename;
@@ -58,35 +58,43 @@
     $errors = array();
     $scriptsToLoad = array();
 
-    //read in & interpret the config file
-    $parsedYaml = Spyc::YAMLLoad('config/config.yml');
-
-    //if the parsing failed or the required 'load' element doesn't exit
-    if(empty($parsedYaml) || !isset($parsedYaml['load'])){
-        $errors[] = 'Problem parsing yaml in config file';
+    $configContents = file_get_contents('./test/config/config.yml');
+    if(empty($configContents)){
+        $errors[] = "Couldn't get contents of config file";
     }
-    else {
+    else{
 
-        foreach($parsedYaml['load'] as $path){
-            $lastFourCharacters = substr($path, -4);
+        //read in & interpret the config file
+        $parsedYaml = Spyc::YAMLLoad($configContents);
 
-            if('*.js' === $lastFourCharacters){//path ends with *.js
-                $files = readDirectory($path, $errors);
 
-                //if readDirectory added to $errors global
-                if(count($errors)){
+        //if the parsing failed or the required 'load' element doesn't exit
+        if(empty($parsedYaml) || !isset($parsedYaml['load'])){
+            $errors[] = 'Problem parsing yaml in config file';
+        }
+        else {
+
+            foreach($parsedYaml['load'] as $path){
+                $lastFourCharacters = substr($path, -4);
+
+                if('*.js' === $lastFourCharacters){//path ends with *.js
+                    $files = readDirectory($path, $errors);
+
+                    //if readDirectory added to $errors global
+                    if(count($errors)){
+                        break;
+                    }
+
+                    //add paths to include list:
+                    $scriptsToLoad = array_merge($scriptsToLoad, $files);
+                }
+                elseif('.js' === substr($lastFourCharacters, 1)){//ends with .js but not *.js
+                    $scriptsToLoad[] = $path;//add path to include list
+                }
+                else {//unrecognizable ending
+                    $errors[] = "'".htmlspecialchars($path)."' is not a valid path; scripts weren't loaded, tests weren't executed";
                     break;
                 }
-
-                //add paths to include list:
-                $scriptsToLoad = array_merge($scriptsToLoad, $files);
-            }
-            elseif('.js' === substr($lastFourCharacters, 1)){//ends with .js but not *.js
-                $scriptsToLoad[] = $path;//add path to include list
-            }
-            else {//unrecognizable ending
-                $errors[] = "'".htmlspecialchars($path)."' is not a valid path; scripts weren't loaded, tests weren't executed";
-                break;
             }
         }
     }
@@ -131,5 +139,5 @@
     $htmlString .= '</body>
                         </html>';
 
-    file_put_contents('test-runner.html', $htmlString);
+    file_put_contents('./test/test-runner.html', $htmlString);
 ?>
