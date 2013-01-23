@@ -1,5 +1,7 @@
 describe( "blockquote highlighter", function(){
-	$('body' ).append('<style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>');
+	$(document ).ready(function(){
+		$('body').append('<style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>');
+	});
 
 	beforeEach( function(){
 		purify.color = 'pink';
@@ -11,7 +13,7 @@ describe( "blockquote highlighter", function(){
 	it( "doesn't change the scroll depth to the top of the first blockquote when jumpToFirstQuote is not true",
 		function(){
 
-			expect( document.body.scrollTop ).toBe( 1 );//TODO change back to zero
+			expect( document.body.scrollTop ).toBe( 0 );
 
 			var blockquoteOffsetTop = purify.util.getOffset( document.querySelectorAll( 'blockquote' )[0] ).top;
 			expect( blockquoteOffsetTop ).toBeGreaterThan( 0 );
