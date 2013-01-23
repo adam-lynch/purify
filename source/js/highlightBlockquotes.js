@@ -16,7 +16,7 @@ purify.highlightBlockquotes = function(doc){
             
             //change styles:
 			blockquoteStyleheight = blockquote.offsetHeight+'px';
-			blockquoteStyle.overflowY = 'scroll'
+			blockquoteStyle.overflowY = 'scroll';
 			blockquoteStyle.backgroundColor = purify.color;
 			blockquoteStyle.backgroundImage = 'none';
 			blockquoteStyle.fontFamily = 'serif';
@@ -24,10 +24,10 @@ purify.highlightBlockquotes = function(doc){
 			blockquoteStyle.color = textColor;
 			blockquoteStyle.borderColor = purify.color;
 			blockquoteStyle.borderLeftColor = 'black';
-            
+
             //jump to first quote
 			if(0 == i && purify.jumpToFirstQuote){
-				blockquote.scrollIntoView(true);
+				window.scrollY = purify.util.getOffset(blockquote ).top;
 			}
 		}
 	}

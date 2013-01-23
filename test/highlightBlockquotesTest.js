@@ -1,7 +1,42 @@
 describe( "blockquote highlighter", function(){
-	$(document ).ready(function(){
-		$('body').append('<style>*, html, body {margin:0; padding:0;}</style><div style="height:1000px; margin:0;"></div><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><blockquote><p>sfdjksfjsfsnfslfslfsfs</p></blockquote><div style="height:1000px"></div>');
+
+	//START adding HTML fixture
+
+	document.addEventListener( 'DOMContentLoaded', function(){
+		//add a <style> to crudely reset CSS defaults
+		var documentBody = document.body,
+			style = document.createElement( 'style' );
+
+		style.innerHTML = '*, html, body {margin:0; padding:0;}';
+
+		var bufferDiv = document.createElement( 'div' );
+		bufferDiv.style = 'height: 1000px; margin: 0;';
+
+		documentBody.appendChild( style );
+		documentBody.appendChild( bufferDiv );
+
+		//add two blockquotes
+		for( var i = 0; i < 2; i++ ){
+
+			var blockquote = document.createElement( 'blockquote' ),
+				paragraph = document.createElement( 'p' );
+
+			/*
+			 Repeat a string N times by created an array of N+1 (which is randomly determined)
+			 and joining each element by the string. N = min 1, max 4
+			 */
+			var max = Math.random() * 5;
+			paragraph.innerHTML = Array( Math.ceil( max )).join( "skjdfksf" );
+
+			blockquote.appendChild( paragraph );//put paragraph in blockquote
+			documentBody.appendChild( blockquote );//add blockquote to the DOM
+		}
+
+		documentBody.appendChild( bufferDiv );
+
 	});
+
+	//END adding HTML fixture
 
 	beforeEach( function(){
 		purify.color = 'pink';
@@ -16,8 +51,8 @@ describe( "blockquote highlighter", function(){
 			expect( document.body.scrollTop ).toBe( 0 );
 
 			var blockquoteOffsetTop = purify.util.getOffset( document.querySelectorAll( 'blockquote' )[0] ).top;
-			expect( blockquoteOffsetTop ).toBeGreaterThan( 0 );
 
+			expect( blockquoteOffsetTop ).toBeGreaterThan( 0 );
 			purify.highlightBlockquotes();//this is where the magic happens
 
 			expect( window.scrollY ).toBe( 0 );//shouldn't have moved
