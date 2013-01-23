@@ -191,6 +191,7 @@
             return escapeInvalidXmlChars(fullName);
         },
 
+
         log: function(str) {
             var console = jasmine.getGlobal().console;
 
