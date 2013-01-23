@@ -1,4 +1,4 @@
-# Purify
+# Purify [![Build Status](https://travis-ci.org/adam-lynch/purify.png)](undefined)
 
 `purify` is a Google Chrome extension which helps you to find quotes within an article. 
 Inspired by one too many opinion pieces based around a sensationalized quote or two.
