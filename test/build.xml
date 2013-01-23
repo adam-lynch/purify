@@ -1,0 +1,40 @@
+<project name="purify" default="init" basedir=".">
+
+    <property environment="env"/>
+    <property name="rootDir" value="${basedir}"/>
+    <property name="xmlRunnerLocation" value="${rootDir}/config/phantomjs_jasminexml_runner.js"/>
+    <property name="phpWriterFile" value="${rootDir}/writeTestRunnerFile.php"/>
+    <property name="htmlRunnerLocation" value="${rootDir}/test-runner.html"/>
+    <property name="resultsLocation" value="${rootDir}/results"/>
+
+    <target name="init">
+        <antcall target="writeTestRunnerFile"/>
+        <antcall target="runTests"/>
+    </target>
+
+    <target name="writeTestRunnerFile">
+        <echo>Parsing config file and writing test runner HTML file...</echo>
+        <exec
+                executable="php"
+                failonerror="true">
+
+            <arg value="${phpWriterFile}"/>
+        </exec>
+    </target>
+
+    <target name="runTests">
+        <echo>Executing tests...</echo>
+        <exec
+                executable="phantomjs"
+                failonerror="true">
+
+            <arg value="${xmlRunnerLocation}"/>
+
+            <arg value="${htmlRunnerLocation}"/>
+
+            <arg value="${resultsLocation}"/>
+
+        </exec>
+    </target>
+
+</project>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purify Tests</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="config/jasmine/jasmine.css">
+
+    <script src="config/jasmine/jasmine.js"></script>
+    <script type="text/javascript">
+
+    </script>
+    <script src="config/jasmine/jasmine-html.js"></script>
+    <script src="config/jasmine.phantomjs-reporter.js"></script>
+    <script src="bootstrap/bootstrap.js"></script>
+    <script src="util/core.js"></script>
+    <script src="util/offset.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+    jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
+    jasmine.getEnv().execute();
+</script>
+</body>
+</html>
