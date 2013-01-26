@@ -32,10 +32,10 @@ function readDirectory($path, &$errors)
         $desiredEndingLength = strlen($desiredEnding);
 
         //read filenames in directory:
-        $directoryContents = opendir($directoryPath);
+        $directoryContents = opendir('./test/' . $directoryPath);
 
         //don't forget to actually give the path along with the actual filename
-        $pathPrefix = '' === $directoryPath ? '' : $directoryPath;
+        $pathPrefix = './' === $directoryPath ? '' : $directoryPath;
 
         while (false !== ($filename = @readdir($directoryContents))) {
             //if the file name ends with .js for example
@@ -58,7 +58,7 @@ function readDirectory($path, &$errors)
 $errors = array();
 $scriptsToLoad = array();
 
-$configContents = file_get_contents('config/config.yml');
+$configContents = file_get_contents('./test/config/config.yml');
 if (empty($configContents)) {
     $errors[] = "Couldn't get contents of config file";
 } else {
