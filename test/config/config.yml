@@ -4,5 +4,8 @@ load:
  - config/jasmine.phantomjs-reporter.js
  - bootstrap/*.js #set up purify for the test environment
  - util/*.js #test utils
+ - fixtures/*.js #set up purify for the test environment
  - ../source/js/*.js #source JavaScript files to test
- - *.js #test specs
+ - suites/util/*.js #test the util functions first
+ - suites/fixtures/*.js #test the util functions first
+ - suites/source/*.js #test specs

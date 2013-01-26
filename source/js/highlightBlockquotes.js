@@ -1,21 +1,16 @@
-purify.highlightBlockquotes = function(doc){
+purify.highlightBlockquotes = function(){
 
-	if(!doc) {
-		doc = document;
-	}
+	var blockquotes = document.querySelectorAll( 'blockquote' );
 
-	var blockquotes = doc.querySelectorAll('blockquote');
+	if( blockquotes.length ){
 
-	if(blockquotes.length){
-		
-		for(var i = 0; i < blockquotes.length; i++){
-			
-            var blockquote = blockquotes[i],
+		for( var i = 0; i < blockquotes.length; i++ ){
+
+			var blockquote = blockquotes[i],
 				blockquoteStyle = blockquote.style,
-				textColor = 'yellow'==purify.color?'black':'white';
-            
-            //change styles:
-			blockquoteStyleheight = blockquote.offsetHeight+'px';
+				textColor = 'yellow' == purify.color ? 'black' : 'white';
+
+			//change styles:
 			blockquoteStyle.overflowY = 'scroll';
 			blockquoteStyle.backgroundColor = purify.color;
 			blockquoteStyle.backgroundImage = 'none';
@@ -25,11 +20,11 @@ purify.highlightBlockquotes = function(doc){
 			blockquoteStyle.borderColor = purify.color;
 			blockquoteStyle.borderLeftColor = 'black';
 
-            //jump to first quote
-			if(0 == i && purify.jumpToFirstQuote){
-				window.scrollY = purify.util.getOffset(blockquote ).top;
+			//jump to first quote
+			if( 0 == i && purify.jumpToFirstQuote ){
+				window.scrollY = purify.util.getOffset( blockquote ).top;
 			}
 		}
 	}
-	
+
 };

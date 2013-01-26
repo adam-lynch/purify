@@ -1,47 +1,28 @@
 describe( "blockquote highlighter", function(){
 
-	//START adding HTML fixture
-
-	document.addEventListener( 'DOMContentLoaded', function(){
-		//add a <style> to crudely reset CSS defaults
-		var documentBody = document.body,
-			style = document.createElement( 'style' );
-
-		style.innerHTML = '*, html, body {margin:0; padding:0;}';
-
-		var bufferDiv = document.createElement( 'div' );
-		bufferDiv.style = 'height: 1000px; margin: 0;';
-
-		documentBody.appendChild( style );
-		documentBody.appendChild( bufferDiv );
-
-		//add two blockquotes
-		for( var i = 0; i < 2; i++ ){
-
-			var blockquote = document.createElement( 'blockquote' ),
-				paragraph = document.createElement( 'p' );
-
-			/*
-			 Repeat a string N times by created an array of N+1 (which is randomly determined)
-			 and joining each element by the string. N = min 1, max 4
-			 */
-			var max = Math.random() * 5;
-			paragraph.innerHTML = Array( Math.ceil( max )).join( "skjdfksf" );
-
-			blockquote.appendChild( paragraph );//put paragraph in blockquote
-			documentBody.appendChild( blockquote );//add blockquote to the DOM
-		}
-
-		documentBody.appendChild( bufferDiv );
-
-	});
-
-	//END adding HTML fixture
-
 	beforeEach( function(){
+		purify.fixture.clean();
 		purify.color = 'pink';
 		purify.jumpToFirstQuote = false;
 		window.scroll( 0, 0 );//make sure document is scrolled to top before running a test
+
+		//START adding HTML fixtures
+
+		//add a <style> to crudely reset CSS defaults
+		purify.fixture.style.resetMarginAndPadding();
+
+		purify.fixture.component.addBuffer( 1000 );//100px tall
+
+		//add two blockquotes
+		for( var i = 0; i < 2; i++ ){
+			purify.fixture.component.addBlockquote( 40 );//40 random characters
+		}
+
+		purify.fixture.component.addBuffer( 1000 );
+	} );
+
+	afterEach( function(){
+		purify.fixture.clean();
 	} );
 
 
@@ -91,19 +72,24 @@ describe( "blockquote highlighter", function(){
 			colors = ['blue', 'red', 'green', 'purple', 'yellow', 'black'];
 
 		for( var i = 0; i < blockquotes; i++ ){
-			var blockquote = blockquotes[i],
-				blockquoteStyle = blockquote.style;
+			var blockquoteBefore = blockquotes[i],
+				blockquoteBeforeStyle = blockquoteBefore.style,
+				backgroundColor = colors[colors.length % i];
 
-			blockquoteStyle.backgroundColor = colors[colors.length % i];
+			blockquoteBeforeStyle.backgroundColor = backgroundColor;
 
-			expect( blockquoteStyle.backgroundColor ).not.toBe( 'transparent' );
-			expect( blockquoteStyle.backgroundColor ).not.toBe( 'white' );
+			expect( blockquoteBeforeStyle.backgroundColor ).not.toBe( 'transparent' );
+			expect( blockquoteBeforeStyle.backgroundColor ).not.toBe( 'white' );
+			expect( blockquoteBeforeStyle.backgroundColor ).toBe( backgroundColor );
 		}
 
 		purify.highlightBlockquotes();//this is where the magic happens
 
-		for( var i = 0; i < blockquotes; i++ ){
-			expect( blockquoteStyle.backgroundColor ).toBe( purify.color );
+		for( var j = 0; j < blockquotes; j++ ){
+			var blockquoteAfter = blockquotes[j],
+				blockquoteAfterStyle = blockquoteAfter.style;
+
+			expect( blockquoteAfterStyle.backgroundColor ).toBe( purify.color );
 		}
 	} );
 } );

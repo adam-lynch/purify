@@ -6,9 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-purify.util = {};
-
 purify.util.getOffset = function( obj ){
+
 	var curtop = curleft = 0;
 	if( obj.offsetParent ){
 		do{
