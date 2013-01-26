@@ -32,7 +32,7 @@ function readDirectory($path, &$errors)
         $desiredEndingLength = strlen($desiredEnding);
 
         //read filenames in directory:
-        $directoryContents = opendir('./test/' . $directoryPath);
+        $directoryContents = opendir($directoryPath);
 
         //don't forget to actually give the path along with the actual filename
         $pathPrefix = './' === $directoryPath ? '' : $directoryPath;
