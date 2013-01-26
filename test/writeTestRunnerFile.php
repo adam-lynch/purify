@@ -35,7 +35,7 @@ function readDirectory($path, &$errors)
         $directoryContents = opendir($directoryPath);
 
         //don't forget to actually give the path along with the actual filename
-        $pathPrefix = './' === $directoryPath ? '' : $directoryPath;
+        $pathPrefix = '' === $directoryPath ? '' : $directoryPath;
 
         while (false !== ($filename = @readdir($directoryContents))) {
             //if the file name ends with .js for example
