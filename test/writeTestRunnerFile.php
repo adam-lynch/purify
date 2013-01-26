@@ -58,7 +58,7 @@ function readDirectory($path, &$errors)
 $errors = array();
 $scriptsToLoad = array();
 
-$configContents = file_get_contents('./test/config/config.yml');
+$configContents = file_get_contents('config/config.yml');
 if (empty($configContents)) {
     $errors[] = "Couldn't get contents of config file";
 } else {
