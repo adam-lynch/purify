@@ -42,6 +42,9 @@ function readDirectory($path, &$errors)
             if (substr($filename, -$desiredEndingLength) === $desiredEnding) {
                 $files[] = $pathPrefix . (empty($pathPrefix) ? '' : '/') . $filename;
             }
+			elseif(is_dir($directoryPath.'/'.$filename) && '.' !== $filename && '..' !== $filename){
+				$files = array_merge($files, readDirectory($directoryPath.'/'.$filename.'/*'.$desiredEnding, $errors));
+			}
         }
     } else {
         $errors[] = 'readDirectory: path cannot be interpreted';
