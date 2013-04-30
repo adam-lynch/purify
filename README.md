@@ -1,3 +1,9 @@
+This project was really just an excuse to get some experience with Chrome extensions, Jasmine, PhantomJS, Travis-CI, etc. I don't think a lot of work will go into this any time soon.
+
+Feel free to use it as an example project. I think I'll eventually create a separate project based on the (Jasmine + PhantomJS + parsing of YAML config file to build HTML test runner) here, since I've already re-used it for another project.
+
+--------------
+
 # Purify [![Build Status](https://travis-ci.org/adam-lynch/purify.png)](https://travis-ci.org/adam-lynch/purify)
 
 `purify` is a Google Chrome extension which helps you to find quotes within an article. 
